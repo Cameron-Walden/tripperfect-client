@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import SavedEventCard from "../SavedEventCard";
@@ -18,6 +18,10 @@ function SavedEvents(props) {
     await axios.delete(deleteEvent);
     getSavedEvents();
   };
+
+  useEffect(() => {
+    getSavedEvents()
+  })
 
     return (
       <>

@@ -37,7 +37,7 @@ const Event = props => {
         baseURL: `http://localhost:3001/favorites`,
       };
       const response = await axios(config);
-      console.log(response.data, "<== response.data");
+      console.log(response.data, "<== response.data in add");
     } catch (e) {
       setError(error = true)
     }
