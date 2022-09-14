@@ -12,15 +12,15 @@ import Footer from "./components/footer/Footer";
 import "./App.css";
 
 function App(props) {
-  let [searchQuery, setSearchQuery] = useState('');
-  let [eventData, setEventData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [eventData, setEventData] = useState([]);
 
   const getEvents = async (event) => {
     event.preventDefault();
     try {
       const eventAPI = `http://localhost:3001/events?city=${searchQuery}&startDateTime`;
       const eventResponse = await axios.get(eventAPI);
-      setEventData(eventData = eventResponse.data._embedded.events);
+      setEventData(eventResponse.data._embedded.events);
     } catch (error) {
       console.log(error)
     }
