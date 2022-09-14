@@ -2,8 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Form, Row, Col, Button } from "react-bootstrap";
 
-
-export default function EventForm(props) {
+export default function EventForm({ setEventData }) {
   const [searchQuery, setSearchQuery] = useState("");
   const handleSearchQuery = (searchQuery) => setSearchQuery(searchQuery);
 
@@ -12,7 +11,7 @@ export default function EventForm(props) {
     try {
       const eventAPI = `http://localhost:3001/events?city=${searchQuery}&startDateTime`;
       const eventResponse = await axios.get(eventAPI);
-      props.setEventData(eventResponse.data._embedded.events);
+      setEventData(eventResponse.data._embedded.events);
     } catch (error) {
       console.log(error);
     }

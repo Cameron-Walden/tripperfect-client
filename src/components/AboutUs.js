@@ -15,14 +15,10 @@ const AboutUs = () => {
           }}
         >
           <Row xs={1} sm={2} md={3} lg={5}>
-            {bios.authors.map((author, index) => (
+            {bios.authors.map((author, idx) => (
               <AuthorCard
-                key={index}
-                img={author.img}
-                name={author.name}
-                bio={author.bio}
-                linkedin={author.linkedin}
-                github={author.github}
+                key={idx}
+                author={author}
               />
             ))}
           </Row>
