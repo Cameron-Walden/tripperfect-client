@@ -15,9 +15,6 @@ function App(props) {
   let [searchQuery, setSearchQuery] = useState('');
   let [eventData, setEventData] = useState([]);
 
-  const handleSearchQuery = (searchQuery) =>
-    setSearchQuery(searchQuery);
-
   const getEvents = async (event) => {
     event.preventDefault();
     try {
@@ -46,7 +43,7 @@ function App(props) {
           </Route>
           <Route exact path="/">
             <Home
-              handleSearchQuery={handleSearchQuery}
+              setSearchQuery={setSearchQuery}
               eventData={eventData}
               getEvents={getEvents}
             />

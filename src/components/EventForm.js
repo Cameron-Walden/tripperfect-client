@@ -1,6 +1,8 @@
 import { Form, Row, Col, Button } from "react-bootstrap";
 
 export default function EventForm(props) {
+ const handleSearchQuery = (searchQuery) => props.setSearchQuery(searchQuery);
+
   return (
     <>
       <Form onSubmit={(event) => props.getEvents(event)}>
@@ -10,7 +12,7 @@ export default function EventForm(props) {
               Please Enter City Name
             </Form.Label>
             <Form.Control
-              onChange={(e) => props.handleSearchQuery(e.target.value)}
+              onChange={(e) => handleSearchQuery(e.target.value)}
               placeholder="Ex: Seattle"
             />
           </Col>

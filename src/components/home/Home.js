@@ -3,18 +3,14 @@ import EventForm from "../EventForm";
 import Event from "../Event";
 import "./Home.css";
 
-const Home = (props) => {
-    return (
-      <Container className="text-center">
-        <EventForm
-          getEvents={props.getEvents}
-          handleSearchQuery={props.handleSearchQuery}
-        />
-        <Event
-          eventData={props.eventData}
-        />
-      </Container>
-    );
-  }
-
-export default Home;
+export default function Home(props) {
+  return (
+    <Container className="text-center">
+      <EventForm
+        getEvents={props.getEvents}
+        setSearchQuery={props.setSearchQuery}
+      />
+      <Event eventData={props.eventData} />
+    </Container>
+  );
+}
