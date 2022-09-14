@@ -5,20 +5,20 @@ import EventCard from "./EventCard";
 
 const Event = props => {
 
-  let [selectedEvent, setSelectedEvent] = useState(null);
-  let [displayModal, setDisplayModal] = useState(false);
-  let [error, setError] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [displayModal, setDisplayModal] = useState(false);
+  const [error, setError] = useState(null);
 
   const showModal = (title) => {
     let selectedEvent = props.eventData.find(
       (singleEvent) => singleEvent.name === title
     );
     console.log(selectedEvent, 'this is selectedEvent')
-    setDisplayModal(displayModal = true)
+    setDisplayModal(true)
     setSelectedEvent(selectedEvent)
   };
 
-  const hideModal = () => setDisplayModal(displayModal = false);
+  const hideModal = () => setDisplayModal(false);
 
   const addEvents = async (savedEvent) => {
     try {
@@ -39,7 +39,7 @@ const Event = props => {
       const response = await axios(config);
       console.log(response.data, "<== response.data in add");
     } catch (e) {
-      setError(error = true)
+      setError(true)
     }
   };
 
