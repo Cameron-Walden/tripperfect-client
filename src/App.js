@@ -33,10 +33,7 @@ function App(props) {
         <Switch>
           <Route path="/saved-events">
             {props.auth0.isAuthenticated ? (
-              <SavedEvents
-                eventData={eventData}
-                getEvents={getEvents}
-              />
+              <SavedEvents />
             ) : (
               <Login />
             )}
