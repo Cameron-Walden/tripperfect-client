@@ -3,17 +3,15 @@ import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import EventCard from "./EventCard";
 
-const Event = props => {
-
+function Event({ eventData, auth0 }){
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [displayModal, setDisplayModal] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   const showModal = (title) => {
-    let selectedEvent = props.eventData.find(
+    let selectedEvent = eventData.find(
       (singleEvent) => singleEvent.name === title
     );
-    console.log(selectedEvent, 'this is selectedEvent')
     setDisplayModal(true)
     setSelectedEvent(selectedEvent)
   };
@@ -22,7 +20,7 @@ const Event = props => {
 
   const addEvents = async (savedEvent) => {
     try {
-      let addedEvent = props.eventData.find(
+      let addedEvent = eventData.find(
         (attraction) => attraction.name === savedEvent
       );
       const config = {
@@ -31,7 +29,7 @@ const Event = props => {
           description: addedEvent.url,
           location: addedEvent._embedded.venues[0].city.name,
           venue: addedEvent._embedded.venues.name,
-          email: props.auth0.user.email,
+          email: auth0.user.email,
         },
         method: "post",
         baseURL: `http://localhost:3001/favorites`,
@@ -39,7 +37,7 @@ const Event = props => {
       const response = await axios(config);
       console.log(response.data, "<== response.data in add");
     } catch (e) {
-      setError(true)
+      setError(!error)
     }
   };
 
@@ -48,11 +46,10 @@ const Event = props => {
         <EventCard
           selectedEvent={selectedEvent}
           displayModal={displayModal}
-          error={error}
           showModal={showModal}
           hideModal={hideModal}
           addEvents={addEvents}
-          eventData={props.eventData}
+          eventData={eventData}
         />
       </>
     );

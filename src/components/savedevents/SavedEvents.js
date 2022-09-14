@@ -4,13 +4,13 @@ import axios from "axios";
 import SavedEventCard from "../SavedEventCard";
 import "./SavedEvents.css";
 
-function SavedEvents(props) {
-  let [savedEventData, setSavedEventData] = useState([]);
+function SavedEvents({ auth0 }) {
+  const [savedEventData, setSavedEventData] = useState([]);
 
   const getSavedEvents = async () => {
-    const savedEventAPI = `http://localhost:3001/favorites?email=${props.auth0.user.email}`;
+    const savedEventAPI = `http://localhost:3001/favorites?email=${auth0.user.email}`;
     const eventResponse = await axios.get(savedEventAPI);
-    setSavedEventData(eventResponse.data );
+    setSavedEventData(eventResponse.data);
   };
 
   const deleteEvents = async (id) => {
@@ -20,20 +20,20 @@ function SavedEvents(props) {
   };
 
   useEffect(() => {
-    getSavedEvents()
-  })
+    getSavedEvents();
+  });
 
-    return (
-      <>
-        {savedEventData.map((attraction, idx) => (
-          <SavedEventCard
-            key={idx}
-            attraction={attraction}
-            deleteEvents={deleteEvents}
-          />
-        ))}
-      </>
-    );
-  }
+  return (
+    <>
+      {savedEventData.map((attraction, idx) => (
+        <SavedEventCard
+          key={idx}
+          attraction={attraction}
+          deleteEvents={deleteEvents}
+        />
+      ))}
+    </>
+  );
+}
 
 export default withAuth0(SavedEvents);

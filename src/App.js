@@ -1,8 +1,6 @@
 import React from "react";
-import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { withAuth0 } from "@auth0/auth0-react";
-import axios from "axios";
 import Header from "./components/Header";
 import Home from "./components/home/Home";
 import Login from "./components/Login";
@@ -11,7 +9,7 @@ import SavedEvents from "./components/savedevents/SavedEvents";
 import Footer from "./components/footer/Footer";
 import "./App.css";
 
-function App(props) {
+function App({ auth0 }) {
  
   return (
     <>
@@ -19,7 +17,7 @@ function App(props) {
         <Header />
         <Switch>
           <Route path="/saved-events">
-            {props.auth0.isAuthenticated ? (
+            {auth0.isAuthenticated ? (
               <SavedEvents />
             ) : (
               <Login />

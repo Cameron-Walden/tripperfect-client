@@ -1,11 +1,18 @@
-// import { Component } from "react";
 import { withAuth0 } from "@auth0/auth0-react";
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Card, Row } from "react-bootstrap";
 import EventModal from "./EventModal";
 import WelcomeCard from "./WelcomeCard";
 
-const EventCard = (props) => {
+function EventCard({
+  selectedEvent,
+  displayModal,
+  showModal,
+  hideModal,
+  addEvents,
+  eventData,
+  auth0,
+}) {
   const { loginWithRedirect } = useAuth0();
   return (
     <>
@@ -16,7 +23,7 @@ const EventCard = (props) => {
           justifyContent: "center",
         }}
       >
-        {props.eventData.map((attraction, idx) => (
+        {eventData.map((attraction, idx) => (
           <Card key={idx} id="eventcard" style={{ width: "18rem" }}>
             <Card.Img variant="top" src={attraction.images[0].url} />
             <Card.Body>
@@ -40,24 +47,28 @@ const EventCard = (props) => {
                 <strong>Local Start Time:</strong>{" "}
                 {attraction.dates.start.localTime}
               </Card.Text>
-              <Button onClick={() => props.showModal(attraction.name)}>
+              <Button onClick={() => showModal(attraction.name)}>
                 More Info
               </Button>
               <EventModal
-                selectedEvent={props.selectedEvent}
-                displayModal={props.displayModal}
-                onHide={props.hideModal}
+                selectedEvent={selectedEvent}
+                displayModal={displayModal}
+                hideModal={hideModal}
               />
-              {props.auth0.isAuthenticated ? (
+              {auth0.isAuthenticated ? (
                 <Button
                   id="eventbutton"
                   variant="primary"
-                  onClick={() => props.addEvents(attraction.name)}
+                  onClick={() => addEvents(attraction.name)}
                 >
                   Save Event!
                 </Button>
               ) : (
-                <Button id="eventbutton" variant="primary" onClick={() => loginWithRedirect()}>
+                <Button
+                  id="eventbutton"
+                  variant="primary"
+                  onClick={() => loginWithRedirect()}
+                >
                   Log In To Save Event
                 </Button>
               )}

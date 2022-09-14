@@ -5,7 +5,7 @@ import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import blimp from "../images/blimpW.png";
 
-const Header = (props) => {
+const Header = ({ auth0 }) => {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
@@ -23,14 +23,14 @@ const Header = (props) => {
               About Us
             </Link>
           </NavItem>
-          {props.auth0.isAuthenticated ? (
+          {auth0.isAuthenticated ? (
             <NavItem>
               <Link to="/saved-events" className="nav-link">
                 Saved Events
               </Link>
             </NavItem>
           ) : null}
-          {props.auth0.isAuthenticated ? (
+          {auth0.isAuthenticated ? (
             <LogoutButton />
           ) : (
             <LoginButton />
