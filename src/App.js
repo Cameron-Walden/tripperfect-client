@@ -12,20 +12,7 @@ import Footer from "./components/footer/Footer";
 import "./App.css";
 
 function App(props) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [eventData, setEventData] = useState([]);
-
-  const getEvents = async (event) => {
-    event.preventDefault();
-    try {
-      const eventAPI = `http://localhost:3001/events?city=${searchQuery}&startDateTime`;
-      const eventResponse = await axios.get(eventAPI);
-      setEventData(eventResponse.data._embedded.events);
-    } catch (error) {
-      console.log(error)
-    }
-  };
-
+ 
   return (
     <>
       <Router>
@@ -39,11 +26,7 @@ function App(props) {
             )}
           </Route>
           <Route exact path="/">
-            <Home
-              setSearchQuery={setSearchQuery}
-              eventData={eventData}
-              getEvents={getEvents}
-            />
+            <Home />
           </Route>
           <Route path="/about-us">
             <AboutUs />
