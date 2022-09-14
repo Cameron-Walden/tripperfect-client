@@ -5,12 +5,12 @@ import SavedEventCard from "../SavedEventCard";
 import "./SavedEvents.css";
 
 function SavedEvents(props) {
-  let [eventData, setEventData] = useState([]);
+  let [savedEventData, setSavedEventData] = useState([]);
 
   const getSavedEvents = async () => {
     const savedEventAPI = `http://localhost:3001/favorites?email=${props.auth0.user.email}`;
     const eventResponse = await axios.get(savedEventAPI);
-    setEventData(eventData = eventResponse.data );
+    setSavedEventData(eventResponse.data );
   };
 
   const deleteEvents = async (id) => {
@@ -25,11 +25,10 @@ function SavedEvents(props) {
 
     return (
       <>
-        {eventData.map((attraction, idx) => (
+        {savedEventData.map((attraction, idx) => (
           <SavedEventCard
-            eventData={eventData}
-            attraction={attraction}
             key={idx}
+            attraction={attraction}
             deleteEvents={deleteEvents}
           />
         ))}

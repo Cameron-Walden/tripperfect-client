@@ -1,20 +1,16 @@
 import { Container } from "react-bootstrap";
+import { useState } from "react";
 import EventForm from "../EventForm";
 import Event from "../Event";
 import "./Home.css";
 
-const Home = (props) => {
-    return (
-      <Container className="text-center">
-        <EventForm
-          getEvents={props.getEvents}
-          handleSearchQuery={props.handleSearchQuery}
-        />
-        <Event
-          eventData={props.eventData}
-        />
-      </Container>
-    );
-  }
+export default function Home(props) {
+  const [eventData, setEventData] = useState([]);
 
-export default Home;
+  return (
+    <Container className="text-center">
+      <EventForm eventData={eventData} setEventData={setEventData} />
+      <Event eventData={eventData} />
+    </Container>
+  );
+}

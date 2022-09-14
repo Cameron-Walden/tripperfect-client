@@ -12,23 +12,7 @@ import Footer from "./components/footer/Footer";
 import "./App.css";
 
 function App(props) {
-  let [searchQuery, setSearchQuery] = useState('');
-  let [eventData, setEventData] = useState([]);
-
-  const handleSearchQuery = (searchQuery) =>
-    setSearchQuery(searchQuery);
-
-  const getEvents = async (event) => {
-    event.preventDefault();
-    try {
-      const eventAPI = `http://localhost:3001/events?city=${searchQuery}&startDateTime`;
-      const eventResponse = await axios.get(eventAPI);
-      setEventData(eventData = eventResponse.data._embedded.events);
-    } catch (error) {
-      console.log(error)
-    }
-  };
-
+ 
   return (
     <>
       <Router>
@@ -36,20 +20,13 @@ function App(props) {
         <Switch>
           <Route path="/saved-events">
             {props.auth0.isAuthenticated ? (
-              <SavedEvents
-                eventData={eventData}
-                getEvents={getEvents}
-              />
+              <SavedEvents />
             ) : (
               <Login />
             )}
           </Route>
           <Route exact path="/">
-            <Home
-              handleSearchQuery={handleSearchQuery}
-              eventData={eventData}
-              getEvents={getEvents}
-            />
+            <Home />
           </Route>
           <Route path="/about-us">
             <AboutUs />
