@@ -9,8 +9,9 @@ export default function EventForm({ setEventData }) {
   const getEvents = async (event) => {
     event.preventDefault();
     try {
-      const eventAPI = `http://localhost:3001/events?city=${searchQuery}&startDateTime`;
+      const eventAPI = `http://localhost:3001/events?city=${searchQuery}&startDateTime&size=50`;
       const eventResponse = await axios.get(eventAPI);
+      console.log(eventResponse)
       setEventData(eventResponse.data._embedded.events);
     } catch (error) {
       console.log(error);

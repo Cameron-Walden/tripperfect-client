@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <Container className="text-center">
       <EventForm setEventData={setEventData} />
-      <Event eventData={eventData} />
+      <Event eventData={eventData} setEventData={setEventData} />
     </Container>
   );
 }
