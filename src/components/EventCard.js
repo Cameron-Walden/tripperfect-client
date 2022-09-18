@@ -37,14 +37,10 @@ function EventCard({
                   Ticket Link
                 </a>
               </Card.Text>
-              {/* <Card.Text>
-                <strong>Min Price:</strong> ${attraction.priceRanges.min} |{" "}
-                <strong>Max Price:</strong> ${attraction.priceRanges.max}
-              </Card.Text> */}
               <Card.Text>
                 <strong>Start Date:</strong>{" "}
-                {attraction.dates.start.localDate.toString} |{" "}
-                <strong>Local Start Time:</strong>{" "}
+                {attraction.dates.start.localDate}<br></br>
+                <strong>Start Time:</strong>{" "}
                 {attraction.dates.start.localTime}
               </Card.Text>
               <Button onClick={() => showModal(attraction.name)}>
